@@ -12,13 +12,6 @@ import thunk from "redux-thunk";
 import Routes from "./Routes";
 
 const io = require("socket.io-client");
-const socket = io();
-
-socket.on("server msg", function(msg) {
-  let onlineUsers = JSON.parse(msg);
-  console.log("socket is on");
-  dispatch({ type: "GET_ONLINE_USERS", value: msg });
-});
 
 const initialState = {
   languages: ["English", "Japanese", "Hindi", "French", "German"],
@@ -118,7 +111,7 @@ const appReducer = (state = initialState, action) => {
     case "GET_ONLINE_USERS": {
       const newState = { ...state };
       newState.onlineUsers = action.value;
-      console.log(newState.onlineUsers);
+      console.log("online Users", newState.onlineUsers);
       return newState;
     }
 
@@ -128,16 +121,24 @@ const appReducer = (state = initialState, action) => {
 };
 const store = createStore(appReducer, initialState, applyMiddleware(thunk));
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.state = { online: [] };
+    this.socket = io("http://localhost:3000/");
+  }
+
+  componentDidMount = () => {
+    this.socket.on("server message", message => {
+      this.setState({ online: JSON.parse(message) });
+      console.log(this.state.online);
+      store.dispatch({ type: "GET_ONLINE_USERS", value: this.state.online });
+    });
+  };
   render() {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <Login />
-          <Register />
-          {/* <Routes /> */}
-          {/* <Navbar />
-          <Picker />
-          <OnlineUsersList /> */}
+          <Routes />
         </View>
       </Provider>
     );

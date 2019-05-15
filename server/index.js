@@ -1,14 +1,31 @@
-const app = require("./app");
-const db = require("./knex");
+const express = require("express");
+const morgan = require("morgan");
+const path = require("path");
+const http = require("http");
+const socketio = require("socket.io");
 
-const PORT = process.env.PORT || 9000;
+const app = express();
+app.use(
+  morgan(
+    ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'
+  )
+);
 
-(async () => {
-  try {
-    console.log("Starting express");
-    app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
-  } catch (err) {
-    console.error("Error starting app!", err);
-    process.exit(-1);
-  }
-})();
+app.get("/", (req, res) => {
+  res.send("dfjkd");
+});
+
+var server = http.createServer(app);
+var io = socketio(server);
+
+io.on("connection", function(socket) {
+  var online = Object.keys(io.engine.clients);
+  console.log("online users", online);
+  io.emit("server message", JSON.stringify(online));
+
+  socket.on("disconnect", function() {
+    var online = Object.keys(io.engine.clients);
+    io.emit("server message", JSON.stringify(online));
+  });
+});
+server.listen(3000, () => console.log("we up."));

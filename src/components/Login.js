@@ -39,7 +39,10 @@ class Login extends React.Component {
           <Button
             title={"Login"}
             style={styles.input}
-            onPress={() => validateUser(this.props.loginInfo)}
+            onPress={() => {
+              validateUser(this.props.loginInfo);
+              this.props.navigation.navigate("OnlineUsersList");
+            }}
           />
 
           <Button

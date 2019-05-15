@@ -3,16 +3,11 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { ListItem, SearchBar } from "react-native-elements";
 import Navbar from "./Navbar";
-
-const onlineUsers = [
-  { name: "Shruti", phone: "03212" },
-  { name: "Rohit", phone: "03212" }
-];
+const io = require("socket.io-client");
 
 class OnlineUsersList extends React.Component {
   constructor(props) {
     super(props);
-    this.props.getUsers();
   }
 
   static navigationOptions = {
@@ -42,16 +37,14 @@ class OnlineUsersList extends React.Component {
     return (
       <View style={styles.container}>
         <Navbar />
+        <Text>{this.props.onlineUsers}</Text>
         <FlatList
           style={styles.flatList}
-          data={[
-            { name: "Shruti", phone: "03212" },
-            { name: "Rohit", phone: "03212" }
-          ]}
+          data={this.props.onlineUsers}
           renderItem={({ item }) => (
             <View style={styles.userList}>
               <View style={styles.circle} />
-              <Text style={styles.text}>{item.name}</Text>
+              <Text style={styles.text}>{item}</Text>
             </View>
           )}
           keyExtractor={item => item.name}
