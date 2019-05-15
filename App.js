@@ -116,17 +116,17 @@ export default class App extends React.Component {
     this.socket = io("https://chat-server-shruti.herokuapp.com/");
   }
 
-  componentDidMount = () => {
-    this.socket.on("server message", message => {
-      this.socket.emit("new user", "shruti");
-      this.socket.on("users", function(data) {
-        console.log(Object.keys(data));
-      });
+  // componentDidMount = () => {
+  //   this.socket.on("server message", message => {
+  //     this.socket.emit("new user", "shruti");
+  //     this.socket.on("users", function(data) {
+  //       console.log(Object.keys(data));
+  //     });
 
-      this.setState({ online: JSON.parse(message) });
-      store.dispatch({ type: "GET_ONLINE_USERS", value: this.state.online });
-    });
-  };
+  //     this.setState({ online: JSON.parse(message) });
+  //     store.dispatch({ type: "GET_ONLINE_USERS", value: this.state.online });
+  //   });
+  // };
   render() {
     return (
       <Provider store={store}>

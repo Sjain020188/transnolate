@@ -3,16 +3,39 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { ListItem, SearchBar } from "react-native-elements";
 import Navbar from "./Navbar";
+
 const io = require("socket.io-client");
 
 class OnlineUsersList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { online: [] };
+    this.socket = io("https://chat-server-shruti.herokuapp.com/");
   }
 
   static navigationOptions = {
     title: "OnlineUsersList"
   };
+
+  componentDidMount = async () => {
+    this.socket.on("server message", message => {
+      let o;
+      this.socket.emit("new user", this.props.loginInfo.username);
+      this.socket.on("users", data => {
+        o = data;
+        console.log("online users", o);
+        this.setState({ online: o });
+      });
+      // this.setState({ online: o });
+      // this.socket.on("users", function(data) {
+      //   this.setState({ online: Object.keys(data) });
+      //   console.log("online users", Object.keys(data));
+      // });
+
+      // this.setState({ online: JSON.parse(message) });
+    });
+  };
+
   renderSeparator = () => {
     return (
       <View
@@ -37,10 +60,10 @@ class OnlineUsersList extends React.Component {
     return (
       <View style={styles.container}>
         <Navbar />
-
+        <Text style={styles.text}>Hello, {this.props.loginInfo.username}</Text>
         <FlatList
           style={styles.flatList}
-          data={this.props.onlineUsers}
+          data={this.state.online}
           renderItem={({ item }) => (
             <View style={styles.userList}>
               <View style={styles.circle} />
@@ -93,7 +116,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    onlineUsers: state.onlineUsers
+    onlineUsers: state.onlineUsers,
+    loginInfo: state.loginInfo
   };
 };
 

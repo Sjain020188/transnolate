@@ -40,7 +40,6 @@ class Login extends React.Component {
             title={"Login"}
             style={styles.input}
             onPress={() => {
-              validateUser(this.props.loginInfo);
               this.props.navigation.navigate("OnlineUsersList");
             }}
           />
@@ -81,9 +80,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserName: () =>
+    setUserName: data =>
       dispatch({
-        type: "SET_LOGIN_USERNAME"
+        type: "SET_LOGIN_USERNAME",
+        value: data.username
       }),
     setPassword: () =>
       dispatch({
