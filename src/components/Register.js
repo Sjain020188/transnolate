@@ -18,47 +18,50 @@ class Register extends React.Component {
     return (
       <View style={styles.container}>
         <Navbar />
-        <TextInput
-          placeholder={"First Name"}
-          style={styles.input}
-          onChangeText={firstName => this.props.setFirstName({ firstName })}
-        />
-        <TextInput
-          placeholder={"Last Name"}
-          style={styles.input}
-          onChangeText={lastName => this.props.setLastName({ lastName })}
-        />
-        <TextInput
-          placeholder={"Email Address"}
-          style={styles.input}
-          onChangeText={email => this.props.setEmail({ email })}
-        />
-        <TextInput
-          placeholder={"Phone Number"}
-          style={styles.input}
-          onChangeText={phoneNumber =>
-            this.props.setPhoneNumber({ phoneNumber })
-          }
-        />
+        <View style={{ flex: 2, marginTop: 20 }}>
+          <TextInput
+            placeholder={"First Name"}
+            style={styles.input}
+            onChangeText={firstName => this.props.setFirstName({ firstName })}
+          />
+          <TextInput
+            placeholder={"Last Name"}
+            style={styles.input}
+            onChangeText={lastName => this.props.setLastName({ lastName })}
+          />
+          <TextInput
+            placeholder={"Email Address"}
+            style={styles.input}
+            onChangeText={email => this.props.setEmail({ email })}
+          />
+          <TextInput
+            placeholder={"Phone Number"}
+            style={styles.input}
+            onChangeText={phoneNumber =>
+              this.props.setPhoneNumber({ phoneNumber })
+            }
+          />
 
-        <TextInput
-          placeholder={"User name"}
-          style={styles.input}
-          onChangeText={username => this.props.setUsername({ username })}
-        />
-        <TextInput
-          placeholder={"Password"}
-          value={this.props.password}
-          onChangeText={password => this.props.setPassword({ password })}
-          style={styles.input}
-        />
-        <Button
-          title={"Register"}
-          style={styles.input}
-          onPress={() => {
-            saveUser(this.props.userInfo);
-          }}
-        />
+          <TextInput
+            placeholder={"User name"}
+            style={styles.input}
+            onChangeText={username => this.props.setUsername({ username })}
+          />
+          <TextInput
+            placeholder={"Password"}
+            value={this.props.password}
+            onChangeText={password => this.props.setPassword({ password })}
+            style={styles.input}
+          />
+          <Button
+            title={"Register"}
+            style={styles.input}
+            onPress={() => {
+              saveUser(this.props.userInfo);
+              this.props.navigation.navigate("Login");
+            }}
+          />
+        </View>
       </View>
     );
   }

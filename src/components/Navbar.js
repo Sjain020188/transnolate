@@ -15,7 +15,7 @@ class Navbar extends React.Component {
         <Header
           style={{ height: 30 }}
           leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "TRANS-NO-LATE", style: { color: "#fff" } }}
+          centerComponent={{ text: "CHATSSAPP....", style: { color: "#fff" } }}
           rightComponent={{ icon: "home", color: "#fff" }}
         />
       </View>

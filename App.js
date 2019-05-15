@@ -31,36 +31,25 @@ const initialState = {
   }
 };
 
-export const saveUser = data => {
-  const user = {
-    first_name: data.firstName,
-    last_name: data.lastName,
-    email: data.email,
-    phone_number: data.phone,
-    username: data.username,
-    password: data.password
-  };
-  axios.post("http://localhost:9000/users", user);
-};
+// export const saveUser = data => {
+//   const user = {
+//     first_name: data.firstName,
+//     last_name: data.lastName,
+//     email: data.email,
+//     phone_number: data.phone,
+//     username: data.username,
+//     password: data.password
+//   };
+//   axios.post("http://localhost:9000/users", user);
+// };
 
-export const validateUser = data => {
-  console.log("bfdjs");
-  axios.post("http://localhost:9000/login");
-};
+// export const validateUser = data => {
+//   console.log("bfdjs");
+//   axios.post("http://localhost:9000/login");
+// };
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_USERS": {
-      const newState = { ...state };
-      newState.onlineUsers = [
-        ...newState.onlineUsers,
-        { name: "Shruti", phone: "03212" },
-        { name: "Rohit", phone: "03212" }
-      ];
-
-      return newState;
-    }
-
     case "SET_PASSWORD": {
       const newState = { ...state };
       newState.userInfo.password = action.value;
@@ -111,7 +100,7 @@ const appReducer = (state = initialState, action) => {
     case "GET_ONLINE_USERS": {
       const newState = { ...state };
       newState.onlineUsers = action.value;
-      console.log("online Users", newState.onlineUsers);
+
       return newState;
     }
 
@@ -123,14 +112,18 @@ const store = createStore(appReducer, initialState, applyMiddleware(thunk));
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = { online: [] };
-    this.socket = io("http://localhost:3000/");
+    this.state = { online: [] };
+    this.socket = io("https://chat-server-shruti.herokuapp.com/");
   }
 
   componentDidMount = () => {
     this.socket.on("server message", message => {
+      this.socket.emit("new user", "shruti");
+      this.socket.on("users", function(data) {
+        console.log(Object.keys(data));
+      });
+
       this.setState({ online: JSON.parse(message) });
-      console.log(this.state.online);
       store.dispatch({ type: "GET_ONLINE_USERS", value: this.state.online });
     });
   };

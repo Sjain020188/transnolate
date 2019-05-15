@@ -19,7 +19,7 @@ class Login extends React.Component {
       <View style={styles.container}>
         <Navbar />
         <Text style={{ flex: 1, paddingTop: 40, fontSize: 30 }}>
-          Welcome to Trans-no-late
+          Welcome to ChatsApp....
         </Text>
         <View style={{ flex: 2 }}>
           <TextInput

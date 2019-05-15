@@ -37,7 +37,7 @@ class OnlineUsersList extends React.Component {
     return (
       <View style={styles.container}>
         <Navbar />
-        <Text>{this.props.onlineUsers}</Text>
+
         <FlatList
           style={styles.flatList}
           data={this.props.onlineUsers}
