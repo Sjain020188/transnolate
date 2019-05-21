@@ -1,15 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Navbar from "./src/components/Navbar";
-import SelectLang from "./src/components/Picker.js";
-import OnlineUsersList from "./src/components/OnlineUsersList.js";
-import Login from "./src/components/Login.js";
-import Register from "./src/components/Register.js";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import axios from "axios";
 import thunk from "redux-thunk";
 import Routes from "./Routes";
+import RoutesMain from "./RoutesMain";
+import OnlineUsersList from "./src/components/OnlineUsersList";
+import * as firebase from "firebase";
+import ApiKeys from "./utils/ApiKeys";
 
 const io = require("socket.io-client");
 
@@ -28,25 +27,33 @@ const initialState = {
     phone: "",
     username: "",
     password: ""
-  }
+  },
+  selectedUser: ""
 };
 
-// export const saveUser = data => {
-//   const user = {
-//     first_name: data.firstName,
-//     last_name: data.lastName,
-//     email: data.email,
-//     phone_number: data.phone,
-//     username: data.username,
-//     password: data.password
-//   };
-//   axios.post("http://localhost:9000/users", user);
-// };
+export const saveUser = async data => {
+  const user = {
+    first_name: data.firstName,
+    last_name: data.lastName,
+    email: data.email,
+    phone_number: data.phone,
+    username: data.username,
+    password: data.password
+  };
+  let a = await axios.post("http://localhost:3000/signup", user);
+};
 
-// export const validateUser = data => {
-//   console.log("bfdjs");
-//   axios.post("http://localhost:9000/login");
-// };
+export const validateUser = data => {
+  const userAdded = axios.post("http://localhost:3000/login", data);
+};
+
+export const getUser = async username => {
+  try {
+    fetch(`http://localhost:3000/user/${username}`).then(res => res.json());
+  } catch (err) {
+    return err(err);
+  }
+};
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -100,6 +107,12 @@ const appReducer = (state = initialState, action) => {
     case "GET_ONLINE_USERS": {
       const newState = { ...state };
       newState.onlineUsers = action.value;
+      return newState;
+    }
+
+    case "SET_SELECTED_USER": {
+      const newState = { ...state };
+      newState.selectedUser = action.value;
 
       return newState;
     }
@@ -112,26 +125,25 @@ const store = createStore(appReducer, initialState, applyMiddleware(thunk));
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { online: [] };
+    this.state = { online: [], isAuthenticated: false };
     this.socket = io("https://chat-server-shruti.herokuapp.com/");
+    if (!firebase.apps.length) {
+      firebase.initializeApp(ApiKeys.FirebaseConfig);
+    }
+    firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
   }
 
-  // componentDidMount = () => {
-  //   this.socket.on("server message", message => {
-  //     this.socket.emit("new user", "shruti");
-  //     this.socket.on("users", function(data) {
-  //       console.log(Object.keys(data));
-  //     });
+  onAuthStateChanged = user => {
+    this.setState({ isAuthenticated: !!user });
+  };
 
-  //     this.setState({ online: JSON.parse(message) });
-  //     store.dispatch({ type: "GET_ONLINE_USERS", value: this.state.online });
-  //   });
-  // };
   render() {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <Routes />
+          {/* <Routes /> */}
+          <Text>Welcome</Text>
+          {!this.state.isAuthenticated ? <Routes /> : <RoutesMain />}
         </View>
       </Provider>
     );

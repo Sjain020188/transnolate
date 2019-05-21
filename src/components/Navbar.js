@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { getlanguages } from "../../App";
 import { Header } from "react-native-elements";
+import { getMaxListeners } from "cluster";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -13,10 +14,10 @@ class Navbar extends React.Component {
     return (
       <View style={styles.container}>
         <Header
-          style={{ height: 30 }}
+          style={{ height: 20 }}
           leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "CHATSSAPP....", style: { color: "#fff" } }}
-          rightComponent={{ icon: "home", color: "#fff" }}
+          centerComponent={{ text: "TRANS-NO-LATE", style: { color: "#fff" } }}
+          rightComponent={{ icon: "logout", color: "#fff" }}
         />
       </View>
     );
@@ -48,3 +49,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Navbar);
+
+getMaxListeners.com

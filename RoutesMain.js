@@ -5,23 +5,12 @@ import Login from "./src/components/Login.js";
 import Register from "./src/components/Register.js";
 import OnlineUsersList from "./src/components/OnlineUsersList.js";
 import UserDetail from "./src/components/UserDetail.js";
-import Main from "./RoutesMain";
-const Project = createStackNavigator({
-  Login: {
-    screen: Login
+const Main = createStackNavigator({
+  OnlineUsersList: {
+    screen: OnlineUsersList
   },
-  Register: {
-    screen: Register
+  UserDetail: {
+    screen: UserDetail
   }
-
-  // SelectLang: {
-  //   screen: SelectLang
-  // },
-  // OnlineUsersList: {
-  //   screen: OnlineUsersList
-  // },
-  // UserDetail: {
-  //   screen: UserDetail
-  // }
 });
-export default createAppContainer(Project);
+export default createAppContainer(Main);

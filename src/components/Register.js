@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 import { connect } from "react-redux";
 import { getlanguages, saveUser } from "../../App";
 import { Header } from "react-native-elements";
 import Navbar from "./Navbar";
+import * as firebase from "firebase";
 
 class Register extends React.Component {
   constructor(props) {
@@ -14,6 +15,23 @@ class Register extends React.Component {
     title: "Register"
   };
 
+  onRegisterPress = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        this.props.userInfo.email,
+        this.props.userInfo.password
+      )
+      .then(
+        () => {
+          saveUser(this.props.userInfo);
+          this.props.setLoginUsername({ username: this.props.userInfo.email });
+        },
+        error => {
+          Alert.alert(error.message);
+        }
+      );
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -57,8 +75,8 @@ class Register extends React.Component {
             title={"Register"}
             style={styles.input}
             onPress={() => {
-              saveUser(this.props.userInfo);
-              this.props.navigation.navigate("Login");
+              this.onRegisterPress();
+              // saveUser(this.props.userInfo);
             }}
           />
         </View>
@@ -120,6 +138,12 @@ const mapDispatchToProps = dispatch => {
     setUsername: data => {
       dispatch({
         type: "SET_USERNAME",
+        value: data.username
+      });
+    },
+    setLoginUsername: data => {
+      dispatch({
+        type: "SET_LOGIN_USERNAME",
         value: data.username
       });
     }
