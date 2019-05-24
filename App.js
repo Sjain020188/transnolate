@@ -142,7 +142,6 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={styles.container}>
           {/* <Routes /> */}
-          <Text>Welcome</Text>
           {!this.state.isAuthenticated ? <Routes /> : <RoutesMain />}
         </View>
       </Provider>

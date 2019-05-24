@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import { getlanguages, validateUser } from "../../App";
 import * as firebase from "firebase";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 class Login extends React.Component {
   constructor(props) {
@@ -42,17 +43,27 @@ class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ flex: 1, paddingTop: 40, fontSize: 30 }}>
-          Welcome to ChatsApp....
+        <Text
+          style={{
+            flex: 1,
+            paddingTop: 40,
+            fontSize: 40,
+            color: "red",
+            fontWeight: "600"
+          }}
+        >
+          TRANS-の-LATE
         </Text>
+
         <View style={{ flex: 2 }}>
           <View style={styles.inputContainer}>
-            <Image
+            <Icon
+              name="envelope"
+              size={20}
+              color="red"
               style={styles.inputIcon}
-              source={{
-                uri: "https://png.icons8.com/male-user/ultraviolet/50/3498db"
-              }}
             />
+
             <TextInput
               placeholder={"Email Address"}
               value={this.props.username}
@@ -61,12 +72,8 @@ class Login extends React.Component {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Image
-              style={styles.inputIcon}
-              source={{
-                uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db"
-              }}
-            />
+            <Icon name="key" size={30} color="red" style={styles.inputIcon} />
+
             <TextInput
               placeholder={"Password"}
               secureTextEntry={true}
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ecf0f1"
+    backgroundColor: "#000"
   },
   input: {
     height: 45,

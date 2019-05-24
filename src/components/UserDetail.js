@@ -36,7 +36,11 @@ class Login extends React.Component {
   };
 
   componentDidMount = async () => {
-    fetch(`http://localhost:3000/users/${this.props.selectedUser}`)
+    fetch(
+      `https://chat-server-shruti.herokuapp.com/users/${
+        this.props.selectedUser
+      }`
+    )
       .then(res => {
         return res.json();
       })
@@ -44,7 +48,11 @@ class Login extends React.Component {
         this.setState({ userInfo: result[0] });
       });
 
-    fetch(`http://localhost:3000/reviews/${this.props.selectedUser}`)
+    fetch(
+      `https://chat-server-shruti.herokuapp.com/reviews/${
+        this.props.selectedUser
+      }`
+    )
       .then(res => {
         return res.json();
       })
@@ -58,7 +66,7 @@ class Login extends React.Component {
   };
 
   addReview() {
-    axios.post("http://localhost:3000/users/review", {
+    axios.post("https://chat-server-shruti.herokuapp.com/users/review", {
       username: this.props.selectedUser,
       review: this.state.newReview
     });

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { getlanguages } from "../../App";
 import { Header } from "react-native-elements";
-import { getMaxListeners } from "cluster";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -49,5 +48,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Navbar);
-
-getMaxListeners.com

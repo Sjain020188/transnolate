@@ -35,8 +35,7 @@ class Register extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Navbar />
-        <View style={{ flex: 2, marginTop: 20 }}>
+        <View style={styles.inputContainer}>
           <TextInput
             placeholder={"First Name"}
             style={styles.input}
@@ -90,15 +89,25 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ecf0f1"
+    backgroundColor: "#000"
   },
   input: {
-    width: 200,
-    height: 44,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "black",
-    marginBottom: 10
+    height: 45,
+    marginLeft: 16,
+    borderBottomColor: "#FFFFFF",
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    width: 250,
+    borderRadius: 30,
+    marginBottom: 20
+  },
+  inputContainer: {
+    borderRadius: 30,
+    width: 300,
+    height: 300,
+    marginBottom: 20,
+
+    alignItems: "center"
   }
 });
 

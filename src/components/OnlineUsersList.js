@@ -5,10 +5,13 @@ import {
   View,
   FlatList,
   Button,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableHighlight
 } from "react-native";
 import { connect } from "react-redux";
 import { ListItem } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
+
 import * as firebase from "firebase";
 
 const io = require("socket.io-client");
@@ -46,14 +49,6 @@ class OnlineUsersList extends React.Component {
     );
   };
 
-  renderOnline = () => {
-    return (
-      <View>
-        <Text>Online</Text>
-      </View>
-    );
-  };
-
   onLogoutPress = () => {
     this.socket.disconnect();
     firebase.auth().signOut();
@@ -61,14 +56,17 @@ class OnlineUsersList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.logout}>
+          <TouchableHighlight
+            onPress={() => {
+              this.onLogoutPress();
+            }}
+          >
+            <Icon name="sign-out" size={30} color="red" />
+          </TouchableHighlight>
+        </View>
         <Text style={styles.text}>Hello, {this.props.loginInfo.username}</Text>
-        <Button
-          title={"Logout"}
-          style={styles.input}
-          onPress={() => {
-            this.onLogoutPress();
-          }}
-        />
+
         <ActivityIndicator
           animating={this.state.loading}
           size="large"
@@ -102,8 +100,8 @@ class OnlineUsersList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    color: "#000",
+    backgroundColor: "#000",
+    color: "red",
     justifyContent: "flex-start",
     alignItems: "stretch",
     flex: 5,
@@ -140,8 +138,13 @@ const styles = StyleSheet.create({
     height: 45,
     marginLeft: 16,
     borderBottomColor: "#FFFFFF",
-    flex: 1,
-    alignSelf: "flex-end"
+    flex: 1
+  },
+  logout: {
+    marginTop: 20,
+    alignSelf: "flex-end",
+    justifyContent: "flex-end",
+    marginRight: 10
   }
 });
 
