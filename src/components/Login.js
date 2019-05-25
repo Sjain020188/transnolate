@@ -48,7 +48,7 @@ class Login extends React.Component {
             flex: 1,
             paddingTop: 40,
             fontSize: 40,
-            color: "red",
+            color: "#673AB7",
             fontWeight: "600"
           }}
         >
@@ -60,7 +60,7 @@ class Login extends React.Component {
             <Icon
               name="envelope"
               size={20}
-              color="red"
+              color="#E91E63"
               style={styles.inputIcon}
             />
 
@@ -72,7 +72,12 @@ class Login extends React.Component {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Icon name="key" size={30} color="red" style={styles.inputIcon} />
+            <Icon
+              name="key"
+              size={30}
+              color="#E91E63"
+              style={styles.inputIcon}
+            />
 
             <TextInput
               placeholder={"Password"}
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000"
+    backgroundColor: "#FFC107"
   },
   input: {
     height: 45,

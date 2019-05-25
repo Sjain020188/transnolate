@@ -5,6 +5,7 @@ import { getlanguages, saveUser } from "../../App";
 import { Header } from "react-native-elements";
 import Navbar from "./Navbar";
 import * as firebase from "firebase";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 class Register extends React.Component {
   constructor(props) {
@@ -41,16 +42,22 @@ class Register extends React.Component {
             style={styles.input}
             onChangeText={firstName => this.props.setFirstName({ firstName })}
           />
+        </View>
+        <View style={styles.inputContainer}>
           <TextInput
             placeholder={"Last Name"}
             style={styles.input}
             onChangeText={lastName => this.props.setLastName({ lastName })}
           />
+        </View>
+        <View style={styles.inputContainer}>
           <TextInput
             placeholder={"Email Address"}
             style={styles.input}
             onChangeText={email => this.props.setEmail({ email })}
           />
+        </View>
+        <View style={styles.inputContainer}>
           <TextInput
             placeholder={"Phone Number"}
             style={styles.input}
@@ -58,27 +65,30 @@ class Register extends React.Component {
               this.props.setPhoneNumber({ phoneNumber })
             }
           />
+        </View>
 
+        <View style={styles.inputContainer}>
           <TextInput
             placeholder={"User name"}
             style={styles.input}
             onChangeText={username => this.props.setUsername({ username })}
           />
+        </View>
+        <View style={styles.inputContainer}>
           <TextInput
             placeholder={"Password"}
             value={this.props.password}
             onChangeText={password => this.props.setPassword({ password })}
             style={styles.input}
           />
-          <Button
-            title={"Register"}
-            style={styles.input}
-            onPress={() => {
-              this.onRegisterPress();
-              // saveUser(this.props.userInfo);
-            }}
-          />
         </View>
+        <Button
+          title={"Register"}
+          style={styles.input}
+          onPress={() => {
+            this.onRegisterPress();
+          }}
+        />
       </View>
     );
   }
@@ -89,24 +99,23 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000"
+    backgroundColor: "#FFC107"
   },
   input: {
     height: 45,
     marginLeft: 16,
     borderBottomColor: "#FFFFFF",
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    width: 250,
-    borderRadius: 30,
-    marginBottom: 20
+    flex: 1
   },
   inputContainer: {
+    borderBottomColor: "#F5FCFF",
+    backgroundColor: "#FFFFFF",
     borderRadius: 30,
-    width: 300,
-    height: 300,
+    borderBottomWidth: 1,
+    width: 250,
+    height: 45,
     marginBottom: 20,
-
+    flexDirection: "row",
     alignItems: "center"
   }
 });

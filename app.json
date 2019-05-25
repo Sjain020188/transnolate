@@ -1,10 +1,13 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-awesome-app",
+    "name": "trans-no-late",
+    "slug": "trans-no-late",
     "privacy": "public",
     "sdkVersion": "32.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,22 +19,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
-    }
-  },
-  "extra": {
-    "firebase": {
-      "apiKey": "AIzaSyAqa_qYr0Z_lllO9f0rycBqIDXTPdkk3II",
-      "authDomain": "chatssapp.firebaseapp.com",
-      "databaseURL": "https://chatssapp.firebaseio.com",
-      "projectId": "chatssapp",
-      "storageBucket": "gs://chatssapp.appspot.com/",
-      "messagingSenderId": "161455756566"
     },
-    "facebook": {
-      "appId": "2363640430354592"
-    }
-  }
+    "description": ""
+  },
+  "platforms": [
+    "web"
+  ]
 }

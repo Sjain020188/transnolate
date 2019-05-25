@@ -62,7 +62,7 @@ class OnlineUsersList extends React.Component {
               this.onLogoutPress();
             }}
           >
-            <Icon name="sign-out" size={30} color="red" />
+            <Icon name="sign-out" size={30} color="#E91E63" />
           </TouchableHighlight>
         </View>
         <Text style={styles.text}>Hello, {this.props.loginInfo.username}</Text>
@@ -72,6 +72,7 @@ class OnlineUsersList extends React.Component {
           size="large"
           color="#0000ff"
         />
+
         <FlatList
           style={styles.flatList}
           data={this.state.online}
@@ -100,7 +101,7 @@ class OnlineUsersList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: "#FFC107",
     color: "red",
     justifyContent: "flex-start",
     alignItems: "stretch",
@@ -111,19 +112,21 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 30,
     flexDirection: "row",
-    flex: 2
+    flex: 2,
+    alignSelf: "stretch"
   },
   userList: {
     fontSize: 30,
     paddingLeft: 40,
     width: "100%",
     flexDirection: "row",
-    alignSelf: "stretch"
+    alignSelf: "stretch",
+    alignItems: "stretch"
   },
   text: {
     fontSize: 20,
     marginTop: 50,
-    color: "red",
+    color: "#673AB7",
     marginLeft: 16
   },
   circle: {

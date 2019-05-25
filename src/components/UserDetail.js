@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { Card } from "react-native-elements";
 import axios from "axios";
 import * as firebase from "firebase";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 class Login extends React.Component {
   constructor(props) {
@@ -75,9 +76,19 @@ class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.logout}>
+          <TouchableHighlight
+            onPress={() => {
+              this.onLogoutPress();
+            }}
+          >
+            <Icon name="sign-out" size={30} color="#E91E63" />
+          </TouchableHighlight>
+        </View>
         <Modal
           animationType="slide"
           transparent={false}
+          style={styles.modal}
           visible={this.state.modalVisible}
           onRequestClose={() => alert.alert("modal is closed")}
         >
@@ -104,39 +115,88 @@ class Login extends React.Component {
           </View>
         </Modal>
 
-        <View style={{ marginTop: 50, flex: 1 }}>
-          <Button
-            title={"Logout"}
-            style={styles.input}
-            onPress={() => {
-              this.onLogoutPress();
+        <View style={{ flex: 2 }}>
+          <Card title="USER DETAILS">
+            <View style={styles.inputContainer}>
+              <Icon
+                name="address-card"
+                size={30}
+                color="#E91E63"
+                style={styles.inputIcon}
+              />
+
+              <Text style={styles.userDetail}>
+                {this.state.userInfo.first_name}
+              </Text>
+            </View>
+            <View style={styles.inputContainer}>
+              <Icon
+                name="envelope"
+                size={30}
+                color="#E91E63"
+                style={styles.inputIcon}
+              />
+
+              <Text style={styles.userDetail}>{this.state.userInfo.email}</Text>
+            </View>
+            <View style={styles.inputContainer}>
+              <Icon
+                name="phone"
+                size={30}
+                color="#E91E63"
+                style={styles.inputIcon}
+              />
+
+              <Text style={styles.userDetail}>
+                {this.state.userInfo.phone_number}
+              </Text>
+            </View>
+            <View style={styles.inputContainer}>
+              <Icon
+                name="user"
+                size={30}
+                color="#E91E63"
+                style={styles.inputIcon}
+              />
+
+              <Text style={styles.userDetail}>
+                {this.state.userInfo.username}
+              </Text>
+            </View>
+          </Card>
+        </View>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <Text
+            style={{
+              fontSize: 20,
+              color: "#673AB7",
+              fontWeight: "400",
+              marginBottom: 10
             }}
-          />
-          <View>
-            <Card title="USER DETAILS">
-              <Text>Name : {this.state.userInfo.first_name}</Text>
-              <Text>Email : {this.state.userInfo.email}</Text>
-              <Text>Phone :{this.state.userInfo.phone_number}</Text>
-              <Text>User Name : {this.state.userInfo.username}</Text>
-            </Card>
-          </View>
+          >
+            Reviews
+          </Text>
           <ScrollView
-            horizontal={true}
-            style={{ flex: 1, flexDirection: "row" }}
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              backgroundColor: "#fff",
+              width: 300
+            }}
           >
             {this.state.reviews.map((item, index) => {
               return (
-                <Card
-                  title="REVIEW"
-                  key={index}
-                  containerStyle={{
-                    alignSelf: "stretch",
-                    width: 350,
-                    height: 200
-                  }}
-                >
-                  <Text styles={{ width: 100 }}>{item.review.trim()}</Text>
-                </Card>
+                <View key={index}>
+                  <Text style={{ margin: 10 }}>{item.review.trim()}</Text>
+                  <View
+                    style={{
+                      height: 1,
+                      width: "86%",
+                      backgroundColor: "#CED0CE",
+                      marginLeft: "20%"
+                    }}
+                  />
+                </View>
               );
             })}
           </ScrollView>
@@ -148,7 +208,7 @@ class Login extends React.Component {
               this.setState({ modalVisible: true });
             }}
           >
-            <Text>Add review</Text>
+            <Text style={{ color: "#ffffff" }}>Add review</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -162,7 +222,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ecf0f1"
+    backgroundColor: "#FFC107"
   },
   inputModal: {
     height: 60,
@@ -173,9 +233,40 @@ const styles = StyleSheet.create({
     marginTop: 150
   },
   button: {
-    backgroundColor: "#0080ff",
+    backgroundColor: "#E91E63",
     borderRadius: 2,
     padding: 10
+  },
+  logout: {
+    alignSelf: "flex-end",
+    justifyContent: "flex-end",
+    marginRight: 10,
+    marginTop: 20
+  },
+  modal: {
+    backgroundColor: "#FFC107"
+  },
+  inputIcon: {
+    width: 30,
+    height: 30,
+    marginLeft: 15,
+    marginRight: 15,
+    justifyContent: "center"
+  },
+  inputContainer: {
+    borderBottomColor: "#F5FCFF",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 30,
+    borderBottomWidth: 1,
+    width: 250,
+    height: 35,
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  userDetail: {
+    fontSize: 20,
+    fontWeight: "200"
   }
 });
 

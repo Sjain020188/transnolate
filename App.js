@@ -6,7 +6,7 @@ import axios from "axios";
 import thunk from "redux-thunk";
 import Routes from "./Routes";
 import RoutesMain from "./RoutesMain";
-import OnlineUsersList from "./src/components/OnlineUsersList";
+
 import * as firebase from "firebase";
 import ApiKeys from "./utils/ApiKeys";
 
@@ -40,16 +40,24 @@ export const saveUser = async data => {
     username: data.username,
     password: data.password
   };
-  let a = await axios.post("http://localhost:3000/signup", user);
+  let a = await axios.post(
+    "https://chat-server-shruti.herokuapp.com/signup",
+    user
+  );
 };
 
 export const validateUser = data => {
-  const userAdded = axios.post("http://localhost:3000/login", data);
+  const userAdded = axios.post(
+    "https://chat-server-shruti.herokuapp.com/login",
+    data
+  );
 };
 
 export const getUser = async username => {
   try {
-    fetch(`http://localhost:3000/user/${username}`).then(res => res.json());
+    fetch(`https://chat-server-shruti.herokuapp.com/user/${username}`).then(
+      res => res.json()
+    );
   } catch (err) {
     return err(err);
   }
