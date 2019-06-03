@@ -12,11 +12,11 @@ Technologies used :
 - Firebase authentication
 
 In order to use this repo,
-`Fork and clone it`
+``Fork and clone it``
 Install Dependencies
-`yarn`
+``yarn``
 Start Dev server
-`yarn start`
+``yarn start``
 Open app in xcode using expo
 
 I have another repo for this project which consist of express server and that is deployed on heroku.
