@@ -1,4 +1,4 @@
-## TRANS-の-late
+## TRANS-NO-LATE
 
 This was created during my time as a student at Code Chrysalis when I learn React native on my own and gave Tech talk on it.
 
@@ -20,6 +20,5 @@ Start Dev server
 Open app in xcode using expo
 
 I have another repo for this project which consist of express server and that is deployed on heroku.
-https://github.com/Sjain020188/chatsapp-server
+https://github.com/Sjain020188/transnolate-server
 
-Heroku link of server: https://chat-server-shruti.herokuapp.com/
