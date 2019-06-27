@@ -4,7 +4,7 @@ This was created during my time as a student at Code Chrysalis when I learn Reac
 
 This is a React native app in which biligual people open to help others can register and people who need help with translation can login and check who all are online. They can check profile of online users and see their phone number and email address. They can then contact them using these contact details. Also they can write reviews for people who helped them with translation.
 
-![HomePage](/Homepage.png | width=100 "Home Page")
+![HomePage](/Homepage.png | width=100)
 
 ## Technologies used :
 - React Native (EXPO CLI)
