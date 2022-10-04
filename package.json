@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "ejs": "^2.6.1",
-    "expo": "^32.0.0",
+    "expo": "^46.0.14",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "firebase": "^6.0.2",
