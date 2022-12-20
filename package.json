@@ -15,7 +15,7 @@
     "express-session": "^1.16.1",
     "firebase": "^6.0.2",
     "http": "^0.0.0",
-    "knex": "^0.16.5",
+    "knex": "^2.3.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.0",
     "passport": "^0.4.0",
